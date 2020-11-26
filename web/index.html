@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn").on("click",function () {
+                var p = $("#f1").serialize();
+                $('#tab tr:not(:first)').remove();
+                $.ajax({
+                    url: 'add',
+                    type: 'post',
+                    data:p,
+                    success: function (list) {
+                        $.ajax({
+                            url:"list",
+                            typr:"post",
+                            success: function (list) {
+                                $.each(list,function(index,value) {
+                                    $('#tab').append(
+                                        "<tr>" +
+                                        "<td>" + value.stuid+ "</td>" +
+                                        "<td>" + value.stuname + "</td>" +
+                                        "</tr>"
+                                    );
+                                });
+                            }
+                        })
+                    }
+                })
+            })
+            $.ajax({
+                url:"list",
+                typr:"post",
+                success: function (list) {
+                    $.each(list,function(index,value) {
+                        $('#tab').append(
+                            "<tr>" +
+                            "<td>" + value.stuid+ "</td>" +
+                            "<td>" + value.stuname + "</td>" +
+                            "</tr>"
+                        );
+                    });
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+<form id="f1">
+    name：<input type="text" name="name">
+    <input type="button" value="注册" id="btn">
+</form>
+<table id="tab" border="1">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+    </tr>
+</table>
+</body>
+</html>

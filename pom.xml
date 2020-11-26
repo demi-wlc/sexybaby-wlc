@@ -37,26 +37,42 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
-            <version>2.2</version>
             <configuration>
                 <!-- 指定项目的web目录 -->
                 <warSourceDirectory>web</warSourceDirectory>
                 <!-- 指定web.xml路径 -->
                 <webXml>web\WEB-INF\web.xml</webXml>
                 <!-- 忽略web.xml文件-->
-                <!--                    <failOnMissingWebXml>false</failOnMissingWebXml>-->
+                <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
             </configuration>
         </plugin>
     </plugins>
     </build>
     <!--在父模块中配置依赖管理，然后不同的子模块按需依赖即可，依赖管理是不会被子模块继承的-->
-    <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.6</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.5.6</version>
+            </dependency>
             <!--junit-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
             <!--mvc-framework-->
             <dependency>
@@ -71,5 +87,4 @@
                 <version>${mysql.version}</version>
             </dependency>
         </dependencies>
-    </dependencyManagement>
 </project>
